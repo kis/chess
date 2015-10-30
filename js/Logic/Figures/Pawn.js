@@ -5,4 +5,8 @@ class Pawn extends Figure {
         super(opts);
     }
 
+    move() {
+        // this.pos.x
+    }
+
 }

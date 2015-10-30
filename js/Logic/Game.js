@@ -48,6 +48,9 @@ class Game {
     end() {
 
     }
+    translateCoordsToAlias(x,y) {
+        return [x,y];
+    }
 
     saveCurrentState() {
 

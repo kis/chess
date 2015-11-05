@@ -21,6 +21,7 @@ class Field {
     get positionToMove() {
         return this.positionToMove;
     }
+    
     getInitState() {
 		let fieldState = [];
 	    for (let n = 8; n > 0; n--) {

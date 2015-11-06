@@ -6,7 +6,7 @@ class Figure {
         this.initPos = {
             x: opts.init.x,
             y: opts.init.y
-        }
+        };
         this.pos = {
             x: opts.posX,
             y: opts.posY

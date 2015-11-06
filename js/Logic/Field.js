@@ -22,6 +22,15 @@ class Field {
         return this.positionToMove;
     }
     
+    moveValidity(curX, curY, x, y) {
+    	if (curX >= 0 && x < this.width && 
+    		curY >= 0 && y < this.width) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+
     getInitState() {
 		let fieldState = [];
 	    for (let n = 8; n > 0; n--) {

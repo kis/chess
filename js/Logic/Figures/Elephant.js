@@ -5,4 +5,10 @@ class Elephant extends Figure {
         super(opts);
     }
 
+    move(posX, posY) {
+
+    	// if ()
+
+    }
+
 }

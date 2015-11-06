@@ -5,33 +5,33 @@ class Horse extends Figure {
         super(opts);
     }
 
-    move(posX, posY) {
+    move(x, y) {
 
-    	if (posX >= 0 && posX < 8 && this.posY < posY && posY < 8) {
-	    	if ((this.posX + 1 == posX && this.posY + 2 == posY) ||
-	    	    (this.posX - 1 == posX && this.posY + 2 == posY)) {
-	    		this.posX = posX;
-	    		this.posY = posY;
+    	if (this.pos.y < y) {
+	    	if ((this.pos.x + 1 == x && this.pos.y + 2 == y) ||
+	    	    (this.pos.x - 1 == x && this.pos.y + 2 == y)) {
+	    		this.pos.x = x;
+	    		this.pos.y = y;
 	    	}
 	
-	    	if ((this.posX + 2 == posX && this.posY + 1 == posY) ||
-	    	    (this.posX - 2 == posX && this.posY + 1 == posY)) {
-	    		this.posX = posX;
-	    		this.posY = posY;
+	    	if ((this.pos.x + 2 == x && this.pos.y + 1 == y) ||
+	    	    (this.pos.x - 2 == x && this.pos.y + 1 == y)) {
+	    		this.pos.x = x;
+	    		this.pos.y = y;
 	    	}
 		}
     	
-    	if (posX >= 0 && posX < 8 && this.posY > posY && posY >= 0) {
-	    	if ((this.posX + 2 == posX && this.posY - 1 == posY) ||
-	    	    (this.posX - 2 == posX && this.posY - 1 == posY)) {
-	    		this.posX = posX;
-	    		this.posY = posY;
+    	if (this.pos.y > y) {
+	    	if ((this.pos.x + 2 == x && this.pos.y - 1 == y) ||
+	    	    (this.pos.x - 2 == x && this.pos.y - 1 == y)) {
+	    		this.pos.x = x;
+	    		this.pos.y = y;
 	    	}
 
-	    	if ((this.posX + 1 == posX && this.posY - 2 == posY) ||
-	    	    (this.posX - 1 == posX && this.posY - 2 == posY)) {
-	    		this.posX = posX;
-	    		this.posY = posY;
+	    	if ((this.pos.x + 1 == x && this.pos.y - 2 == y) ||
+	    	    (this.pos.x - 1 == x && this.pos.y - 2 == y)) {
+	    		this.pos.x = x;
+	    		this.pos.y = y;
 	    	}
     	}
 

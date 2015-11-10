@@ -7,12 +7,19 @@ class Queen extends Figure {
 
     move(x, y) {
 
-        //TODO
-    	if (x - this.pos.x < 2 && x - this.pos.x > -2 && 
-    		y - this.pos.y < 2 && y - this.pos.y < -2) {
-    			this.pos.x = x;
-    			this.pos.y = y;
-    	}
+        if (x !== this.pos.x) {
+            if (y == this.pos.y || 
+                this.pos.x - x == y - this.pos.y || 
+                this.pos.x - x == this.pos.y - y) {
+                this.pos.x = x;
+                this.pos.y = y;
+            }
+        }
+
+        if (x == this.pos.x && y !== this.pos.y) {
+            this.pos.x = x;
+            this.pos.y = y;
+        }
 
     }
 

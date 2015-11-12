@@ -1,0 +1,9 @@
+
+.chess-field {
+	display: block;
+}
+
+.chess-field {
+	display: inline-block;
+	padding: 20px;
+}

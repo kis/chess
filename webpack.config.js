@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
-    './js/index'
+    './js/Render'
   ],
   devtool: 'eval',
   output: {

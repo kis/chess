@@ -30,3 +30,8 @@
 .chess-field:hover {
 	background-color: yellow;
 }
+
+.chess-field.black {
+	background-color: black;
+	color: white;
+}

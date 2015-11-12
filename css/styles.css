@@ -1,9 +1,32 @@
 
-.chess-field {
+.letters-line {
 	display: block;
+	font-size: 0;
+}
+
+.letters-field {
+	display: inline-block;
+	width: 22px;
+	padding: 20px;
+	text-align: center;
+	font-size: 14px;
+}
+
+.chess-line {
+	display: block;
+	font-size: 0;
 }
 
 .chess-field {
 	display: inline-block;
+	width: 20px;
+	height: 20px;
 	padding: 20px;
+	font-size: 14px;
+	text-align: center;
+	border: 1px solid black;
+}
+
+.chess-field:hover {
+	background-color: yellow;
 }

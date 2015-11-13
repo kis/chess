@@ -1,25 +1,4 @@
-
-var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-
-var data = new Array();
-
-var isWhite = false;
-
-for (var i = 7; i >= 0; i--) {
-	isWhite = !isWhite;
-	data[i] = {
-		index: 8 - i, 
-		arr: new Array()
-	};
-	for (var j = 1; j < 9; j++) {
-		isWhite = !isWhite;
-		data[i].arr[j] = {
-			letter: letters[j-1],
-			num: 8 - i,
-			color: isWhite ? 'chess-field white' : 'chess-field black'
-		};	
-	}
-}
+import Field from './Logic/Field';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -54,4 +33,7 @@ class ChessField extends React.Component {
 	}
 }
 
-ReactDOM.render(<ChessField letters={letters} data={data} />, document.getElementsByClassName('chess-area')[0]);
+var field = new Field();
+var data = field.getInitState();
+
+ReactDOM.render(<ChessField letters={field.letters} data={data} />, document.getElementsByClassName('chess-area')[0]);

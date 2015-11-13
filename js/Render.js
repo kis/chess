@@ -9,23 +9,23 @@ class ChessField extends React.Component {
 			<div>
 				<div className='letters-line'>
 					<div className="letters-field"></div>
-					{this.props.letters.map(function(result) {
-					  return <div className="letters-field">{result}</div>
+					{this.props.letters.map(function(result, i) {
+					  return <div className="letters-field" key={i}>{result}</div>
 					})}
 				</div>
-				{this.props.data.map(function(result) {
-				  return <div className="chess-line">
+				{this.props.data.map(function(result, i) {
+				  return <div className="chess-line" key={i}>
 		  			 	<div className="letters-field">{result.index}</div>
-		  			 	{result.arr.map(function(res) {
-		  			 	  return <div className={res.color}>{res.letter} {res.num}</div>
+		  			 	{result.arr.map(function(res, j) {
+		  			 	  return <div className={res.color} key={j}>{res.letter} {res.num}</div>
 		  			 	})}
 		  			 	<div className="letters-field">{result.index}</div>
 		  			 </div>
 				})}
 	  			<div className="letters-line">
 					<div className="letters-field"></div>
-					{this.props.letters.map(function(result) {
-					  return <div className="letters-field">{result}</div>
+					{this.props.letters.map(function(result, i) {
+					  return <div className="letters-field" key={i}>{result}</div>
 					})}
 				</div>
 			</div>

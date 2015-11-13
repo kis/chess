@@ -1,4 +1,6 @@
 
+import Figure from '../Figure';
+
 class Queen extends Figure {
 
     constructor(opts) {
@@ -24,3 +26,5 @@ class Queen extends Figure {
     }
 
 }
+
+export default Queen;

@@ -1,27 +1,38 @@
 
+.chess-area {
+	position: absolute;
+	left: 25%;
+	width: 950px;
+}
+
 .letters-line {
 	display: block;
 	font-size: 0;
+	height: 90px;
 }
 
 .letters-field {
 	display: inline-block;
-	width: 22px;
-	padding: 20px;
+	width: 91px;
+	height: 61px;
 	text-align: center;
-	font-size: 14px;
+	font-size: 48px;
+}
+
+.letters-field.info {
+	margin-bottom: 20px;
 }
 
 .chess-line {
 	display: block;
 	font-size: 0;
+	height: 90px;
 }
 
 .chess-field {
 	display: inline-block;
-	width: 20px;
-	height: 20px;
-	padding: 20px;
+	width: 90px;
+	height: 90px;
 	font-size: 14px;
 	text-align: center;
 	border: 1px solid black;
@@ -35,4 +46,8 @@
 .chess-field:hover {
 	background-color: yellow;
 	color: black;
+}
+
+.figure {
+	font-size: 72px;
 }

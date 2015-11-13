@@ -1,4 +1,6 @@
 
+import Figure from '../Figure';
+
 class Elephant extends Figure {
 
     constructor(opts) {
@@ -24,3 +26,5 @@ class Elephant extends Figure {
     }
 
 }
+
+export default Elephant;

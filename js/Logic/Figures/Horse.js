@@ -1,4 +1,6 @@
 
+import Figure from '../Figure';
+
 class Horse extends Figure {
 
     constructor(opts) {
@@ -38,3 +40,5 @@ class Horse extends Figure {
     }
 
 }
+
+export default Horse;

@@ -1,4 +1,6 @@
 
+import Figure from '../Figure';
+
 class Pawn extends Figure {
 
     constructor(opts) {
@@ -29,3 +31,5 @@ class Pawn extends Figure {
     }
 
 }
+
+export default Pawn;

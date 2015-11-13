@@ -1,4 +1,6 @@
 
+import Figure from '../Figure';
+
 class Rook extends Figure {
 
     constructor(opts) {
@@ -24,3 +26,5 @@ class Rook extends Figure {
     }
 
 }
+
+export default Rook;

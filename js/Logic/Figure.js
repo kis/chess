@@ -8,13 +8,18 @@ class Figure {
             y: opts.init.y
         };
         this.pos = {
-            x: opts.posX,
-            y: opts.posY
+            x: this.initPos.x,
+            y: this.initPos.y
         };
+        this.code = opts.code;
     }
 
-    get name() {
+    get _name() {
         return this.name;
+    }
+
+    set _name(name) {
+        this.name = name;
     }
 
     get posX() {
@@ -33,6 +38,6 @@ class Figure {
         this.pos.y = posY;
     }
 
-
-
 }
+
+export default Figure;

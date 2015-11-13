@@ -11,16 +11,16 @@ class Field {
         this.letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     }
 
-    /*set positionToMove(pos) {
+    set _positionToMove(pos) {
         this.positionToMove = {
             x: pos.x,
             y: pos.y
         };
-    }*/
+    }
 
-    /*get positionToMove() {
+    get _positionToMove() {
         return this.positionToMove;
-    }*/
+    }
     
     moveValidity(curX, curY, x, y) {
     	if (curX >= 0 && x < this.width && 
@@ -46,31 +46,16 @@ class Field {
                 data[i].arr[j] = {
                     letter: this.letters[j-1],
                     num: 8 - i,
+                    x: j - 1,
+                    y:  - i,
+                    isEmpty: true,
+                    figure: null,
                     color: isWhite ? 'chess-field white' : 'chess-field black'
                 };  
             }
         }
 
         return data;
-
-		/*let fieldState = [];
-	    for (let n = 8; n > 0; n--) {
-	        let evenTrigger = n % 2 === 0;
-	        for (let l = 0; l < 8; l++) {
-	            let letter = ['A','B','C','D','E','F','G','H'][l];
-	            let color = evenTrigger ? 'white' : 'black';
-	            evenTrigger = !evenTrigger;
-	            let state = {
-	                alias: letter + n,
-	                color: color,
-	                posX: 0,
-	                posY: 0,
-	                isEmpty: true
-	            }
-	            fieldState.push(state);
-	        }
-	    }
-	    return fieldState;*/
 	}
 
 }

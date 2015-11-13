@@ -1,17 +1,4 @@
 
-// import Handlebars from "../bower_components/handlebars/handlebars.js"
-
-var xhr = new XMLHttpRequest();
-xhr.open('GET', '/js/Field.html', false);
-xhr.send();
-
-if (xhr.status != 200) {
-	console.log(xhr)
-} else {
-	console.log(xhr)
-	var source = xhr.responseText;
-}
-
 var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
 var data = new Array();
@@ -29,14 +16,42 @@ for (var i = 7; i >= 0; i--) {
 		data[i].arr[j] = {
 			letter: letters[j-1],
 			num: 8 - i,
-			color: isWhite ? 'white' : 'black'
+			color: isWhite ? 'chess-field white' : 'chess-field black'
 		};	
 	}
 }
 
-console.log(data);
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-var template = Handlebars.compile(source);
-var result = template({data: data, letters: letters});
+class ChessField extends React.Component {
+	render() {
+		return ( 
+			<div>
+				<div className='letters-line'>
+					<div className="letters-field"></div>
+					{this.props.letters.map(function(result) {
+					  return <div className="letters-field">{result}</div>
+					})}
+				</div>
+				{this.props.data.map(function(result) {
+				  return <div className="chess-line">
+		  			 	<div className="letters-field">{result.index}</div>
+		  			 	{result.arr.map(function(res) {
+		  			 	  return <div className={res.color}>{res.letter} {res.num}</div>
+		  			 	})}
+		  			 	<div className="letters-field">{result.index}</div>
+		  			 </div>
+				})}
+	  			<div className="letters-line">
+					<div className="letters-field"></div>
+					{this.props.letters.map(function(result) {
+					  return <div className="letters-field">{result}</div>
+					})}
+				</div>
+			</div>
+		);
+	}
+}
 
-document.getElementsByClassName('chess-area')[0].innerHTML = result;
+ReactDOM.render(<ChessField letters={letters} data={data} />, document.getElementsByClassName('chess-area')[0]);

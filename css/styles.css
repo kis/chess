@@ -27,11 +27,12 @@
 	border: 1px solid black;
 }
 
-.chess-field:hover {
-	background-color: yellow;
-}
-
 .chess-field.black {
 	background-color: black;
 	color: white;
+}
+
+.chess-field:hover {
+	background-color: yellow;
+	color: black;
 }

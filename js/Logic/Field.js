@@ -1,10 +1,5 @@
 
-import King     from './Figures/King';
-import Queen    from './Figures/Queen';
-import Rook     from './Figures/Rook';
-import Elephant from './Figures/Elephant';
-import Horse    from './Figures/Horse';
-import Pawn     from './Figures/Pawn';
+import GameController from './GameController';
 
 class Field {
 
@@ -39,6 +34,8 @@ class Field {
     }
 
     getInitState() {
+        var gameController = new GameController();
+
         let data = new Array();
         let isWhite = false;
 
@@ -49,9 +46,10 @@ class Field {
                 arr: new Array()
             };
             for (let j = 1; j < 9; j++) {
-                let figure = this.getFigureByPosition({
+                let figure = gameController.getFigureByPosition({
                     letter: this.letters[j-1], 
-                    num: 8 - i
+                    num: 8 - i,
+                    x: j - 1
                 });
 
                 isWhite = !isWhite;
@@ -65,109 +63,11 @@ class Field {
                     isBlack: !isWhite ? true : false, 
                     color: isWhite ? 'chess-field white' : 'chess-field black'
                 };  
-                console.log(figure)
             }
         }
 
         return data;
 	}
-
-    getFigures() {
-        var figures = {
-            kings: [],
-            queens: [],
-            rooks: [],
-            elephants: [],
-            horses: [],
-            pawns: []
-        };
-
-        for(let i=0; i<2; i++) {
-            figures.kings.push(new King({
-                name: !i ? 'Black' : 'White' + ' King',
-                color: !i ? true : false
-            }));
-        }
-
-        for(let i=0; i<2; i++) {
-            figures.queens.push(new Queen({
-                name: !i ? 'Black' : 'White' + ' Queen',
-                color: !i ? true : false,
-            }));
-        }
-
-        for(let i=0; i<4; i++) {
-            figures.rooks.push(new Rook({
-                name: i < 2 ? 'Black' : 'White' + ' Rook',
-                color: i < 2 ? true : false,
-            }));
-        }
-
-        for(let i=0; i<4; i++) {
-            figures.elephants.push(new Elephant({
-                name: i < 2 ? 'Black' : 'White' + ' Elephant',
-                color: i < 2 ? true : false,
-            }));
-        }
-
-        for(let i=0; i<4; i++) {
-            figures.horses.push(new Horse({
-                name: i < 2 ? 'Black' : 'White' + ' Horse',
-                color: i < 2 ? true : false,
-            }));
-        }
-
-        for(let i=0; i<16; i++) {
-            figures.pawns.push(new Pawn({
-                name: i < 8 ? 'Black' : 'White' + ' Pawn',
-                color: i < 8 ? true : false,
-            }));
-        }
-
-        return figures;
-    }
-
-    getFigureByPosition(pos) {
-        if (pos.num == 1) {
-            if (pos.letter == 'a') {
-                return this.getFigures().rooks[0];
-            }
-
-            if (pos.letter == 'b') {
-                return this.getFigures().horses[0];
-            }
-
-            if (pos.letter == 'c') {
-                return this.getFigures().elephants[0];
-            }
-
-            if (pos.letter == 'd') {
-                return this.getFigures().queens[0];
-            }
-
-            if (pos.letter == 'e') {
-                return this.getFigures().kings[0];
-            }
-
-            if (pos.letter == 'f') {
-                return this.getFigures().elephants[1];
-            }
-
-            if (pos.letter == 'g') {
-                return this.getFigures().horses[1];
-            }
-
-            if (pos.letter == 'h') {
-                return this.getFigures().rooks[1];
-            }
-        }
-
-        if (pos.num == 2) {
-            return this.getFigures().rooks[0];
-        }
-
-        return null;
-    }
 
 }
 

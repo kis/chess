@@ -1,3 +1,6 @@
+* {
+	box-sizing: border-box;
+}
 
 .chess-area {
 	position: absolute;
@@ -13,10 +16,12 @@
 
 .letters-field {
 	display: inline-block;
-	width: 91px;
-	height: 61px;
+	vertical-align: top;
+	width: 90px;
+	height: 90px;
 	text-align: center;
 	font-size: 48px;
+	line-height: 90px;
 }
 
 .letters-field.info {
@@ -31,21 +36,22 @@
 
 .chess-field {
 	display: inline-block;
+	vertical-align: top;
+	line-height: 90px;
 	width: 90px;
 	height: 90px;
 	font-size: 14px;
 	text-align: center;
-	border: 1px solid black;
+	border: 1px solid #CEAD7C;
+	cursor: pointer;
 }
 
 .chess-field.black {
-	background-color: black;
-	color: white;
+	background-color: #CEAD7C;
 }
 
 .chess-field:hover {
 	background-color: yellow;
-	color: black;
 }
 
 .figure {

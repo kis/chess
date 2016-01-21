@@ -3,15 +3,18 @@ class Figure {
 
     constructor(opts) {
         this.name = opts.name;
-        this.initPos = {
+
+        this.initPos = opts.init ? {
             x: opts.init.x,
             y: opts.init.y
-        };
-        this.pos = {
+        } : null;
+
+        this.pos = opts.initPos ? {
             x: this.initPos.x,
             y: this.initPos.y
-        };
-        this.code = opts.code;
+        } : null;
+        
+        this.code = opts.code || null;
     }
 
     get _name() {

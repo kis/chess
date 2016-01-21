@@ -5,6 +5,8 @@ class Queen extends Figure {
 
     constructor(opts) {
         super(opts);
+        this.color = opts.color;
+        this.code = this.color ? '&#9819;' : '&#9813;';
     }
 
     move(x, y) {

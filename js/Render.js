@@ -1,9 +1,7 @@
-import Field from './Logic/Field';
-
-import King from './Logic/Figures/King';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import Field from './Logic/Field';
 
 class ChessField extends React.Component {
 	render() {
@@ -20,7 +18,7 @@ class ChessField extends React.Component {
 		  			 	<div className="letters-field figure">{result.index}</div>
 		  			 	{result.arr.map(function(res, j) {
 		  			 	  return <div className={res.color} key={j}>
-		  			 	  	<span className="figure" dangerouslySetInnerHTML={{__html: king.code}}></span>
+		  			 	  	<span className="figure" dangerouslySetInnerHTML={{__html: res.figure ? res.figure.code : null}}></span>
 		  			 	  </div>
 		  			 	})}
 		  			 	<div className="letters-field figure">{result.index}</div>
@@ -40,23 +38,5 @@ class ChessField extends React.Component {
 var field = new Field();
 var letters = field.letters;
 var data = field.getInitState();
-
-var king = new King({
-	name: 'King',
-	init: {
-		x: 5,
-		y: 0
-	},
-	code: '&#9812;'
-});
-
-var king = new King({
-	name: 'King',
-	init: {
-		x: 0,
-		y: 0
-	},
-	code: '&#9812;'
-});
 
 ReactDOM.render(<ChessField letters={letters} data={data} />, document.getElementsByClassName('chess-area')[0]);

@@ -5,8 +5,13 @@ import Draggable, {DraggableCore} from 'react-draggable';
 import Field from './Logic/Field';
 
 class ChessField extends React.Component {
-	startDragFigure(e, data) {
+	stopDragFigure(e, data) {
 		console.log(e, data)
+	
+		let attrs = data.node.parentElement.attributes;
+		let x = attrs['data-x'];
+		let y = attrs['data-y'];
+		console.log(x, y)
 	}
 
 	renderLettersLine() {
@@ -27,7 +32,6 @@ class ChessField extends React.Component {
 			return '';
 		}
 
-		console.log(data)
 		const CellWidth = 90;
 
 		var dragOptions = {
@@ -42,14 +46,14 @@ class ChessField extends React.Component {
 			grid: [CellWidth, CellWidth]
 		};
 
-		return <Draggable onStart={this.startDragFigure} grid={dragOptions.grid} bounds={dragOptions.bounds}>
+		return <Draggable onStop={this.stopDragFigure} grid={dragOptions.grid} bounds={dragOptions.bounds}>
 			<div className="figure" dangerouslySetInnerHTML={{__html: data.figure ? data.figure.code : null}}></div>
 		</Draggable>
 	}
 
 	renderChessCell(data, key) {
 		var cellClass = "chess-field " + data.class;
-		return <div className={cellClass} key={key}>
+		return <div className={cellClass} data-x={data.x} data-y={data.y} key={key}>
 			{this.renderFigure(data)}
 		</div>
 	}

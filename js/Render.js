@@ -6,12 +6,16 @@ import Field from './Logic/Field';
 
 class ChessField extends React.Component {
 	stopDragFigure(e, data) {
-		console.log(e, data)
-	
 		let attrs = data.node.parentElement.attributes;
-		let x = attrs['data-x'];
-		let y = attrs['data-y'];
-		console.log(x, y)
+		let oldX = attrs['data-x'];
+		let oldY = attrs['data-y'];
+		console.log(oldX, oldY)
+
+		let transform = data.node.style.transform;
+		let arr = transform.match(/(-)?\d{1,3}/g);
+		let [x, y] = arr;
+		let [deltaX, deltaY] = [x/90, y/90];
+		console.log(deltaX, deltaY)
 	}
 
 	renderLettersLine() {

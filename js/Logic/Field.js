@@ -52,16 +52,23 @@ class Field {
                     x: j - 1
                 });
 
+                if (figure) {
+                    figure.initPos = {
+                        x: j - 1,
+                        y: 8 - i 
+                    };
+                }
+
                 isWhite = !isWhite;
                 data[i].arr[j] = {
                     letter: this.letters[j-1],
                     num: 8 - i,
                     x: j - 1,
-                    y:  - i,
+                    y: i,
                     isEmpty: true,
                     figure: figure,
                     isBlack: !isWhite ? true : false, 
-                    class: isWhite ? 'chess-field white' : 'chess-field black'
+                    class: isWhite ? 'white' : 'black'
                 };  
             }
         }

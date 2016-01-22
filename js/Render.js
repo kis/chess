@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import Field from './Logic/Field';
 
+import 'jquery-ui';
+
 class LettersField extends React.Component {
 	render() {
 		return <div className="letters-field figure" key={this.props.key}>{this.props.index}</div>
@@ -53,3 +55,5 @@ var letters = field.letters;
 var data = field.getInitState();
 
 ReactDOM.render(<ChessField letters={letters} data={data} />, document.getElementsByClassName('chess-area')[0]);
+
+$( ".chess-area" ).draggable();

@@ -13,11 +13,13 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'jquery-ui': 'jquery-ui'
+    })
   ],
-  resolve: {
-    extensions: ['', '.js']
-  },
   module: {
     loaders: [{
       test: /\.js?$/,
@@ -25,5 +27,8 @@ module.exports = {
       exclude: /node_modules/,
       include: path.join(__dirname, 'js')
     }]
+  },
+  resolve: {
+    extensions: ['', '.js']
   }
 };

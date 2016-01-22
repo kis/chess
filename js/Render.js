@@ -6,20 +6,38 @@ import Field from './Logic/Field';
 
 class ChessField extends React.Component {
 	dropFigure(elData, e, data) {
-		console.log(elData)
-
-		//curr position
-		/*let attrs = data.node.parentElement.attributes;
-		let oldX = attrs['data-x'];
-		let oldY = attrs['data-y'];
-		console.log(oldX, oldY)*/
-
-		//final position
 		let transform = data.node.style.transform;
 		let arr = transform.match(/(-)?\d{1,3}/g);
-		let [x, y] = arr;
-		let [deltaX, deltaY] = [x/90, y/90];
-		console.log(deltaX, deltaY)
+		let [a, b] = arr;
+		let [deltaX, deltaY] = [a/90, b/90];
+		var {x, y} = elData.figure.pos;
+		let [newX, newY] = [x+deltaX, y+deltaY];
+		this.processMoving(elData, {x: newX, y: newY});
+	}
+
+	processMoving(elData, pos) {
+		console.log(pos.x, pos.y);
+
+		var currentField = this.props.data[pos.y].arr[pos.x];
+		var isValidField = elData.figure.moveValidity(pos.x, pos.y);
+
+		console.log(elData, currentField)
+
+		var oursFigure;
+
+		if (!currentField.isEmpty) {
+			oursFigure = elData.figure.color == currentField.figure.color;
+		}
+
+		if (isValidField) {
+			if (currentField.isEmpty) {
+				console.log('можем ходить')
+			} else if (!oursFigure) {
+				console.log('бьем')
+			} else if (oursFigure) {
+				console.log('наступили на свою фигуру')
+			}			
+		}
 	}
 
 	renderLettersLine() {

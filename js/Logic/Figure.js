@@ -15,11 +15,13 @@ class Figure {
         } : null;
         
         this.code = opts.code || null;
+
+        this.width = 8;
     }
 
-    moveValidity(curX, curY, x, y) {
-        if (curX >= 0 && x < this.width && 
-            curY >= 0 && y < this.width) {
+    moveValidity(x, y) {
+        if (this.pos.x >= 0 && x < this.width && 
+            this.pos.y >= 0 && y < this.width) {
             return true;
         } else {
             return false;

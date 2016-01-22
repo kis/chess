@@ -45,16 +45,16 @@ class Field {
                 index: 8 - i, 
                 arr: new Array()
             };
-            for (let j = 1; j < 9; j++) {
+            for (let j = 0; j < 8; j++) {
                 let figure = gameController.getFigureByPosition({
-                    letter: this.letters[j-1], 
+                    letter: this.letters[j], 
                     num: 8 - i,
-                    x: j - 1
+                    x: j
                 });
 
                 if (figure) {
                     figure.initPos = {
-                        x: j - 1,
+                        x: j,
                         y: i 
                     };
                     figure.pos = figure.initPos;
@@ -62,11 +62,11 @@ class Field {
 
                 isWhite = !isWhite;
                 data[i].arr[j] = {
-                    letter: this.letters[j-1],
+                    letter: this.letters[j],
                     num: 8 - i,
-                    x: j - 1,
+                    x: j,
                     y: i,
-                    isEmpty: true,
+                    isEmpty: figure ? false : true,
                     figure: figure,
                     isBlack: !isWhite ? true : false, 
                     class: isWhite ? 'white' : 'black'

@@ -23,8 +23,26 @@ class ChessField extends React.Component {
 	}
 
 	renderFigure(data) {
+		if (!data.figure) {
+			return '';
+		}
+
 		console.log(data)
-		return <Draggable onStart={this.startDragFigure} grid={[90, 90]} bounds={{top: -100, left: -100, right: 100, bottom: 100}}>
+		const CellWidth = 90;
+
+		var dragOptions = {
+			start: {x: -90, y: -90},
+			bounds: {
+				left: -90*data.x,
+				top: -90*data.y,
+				right: 90*(7-data.x), 
+				bottom: 90*(7-data.y)
+			},
+			zIndex: 99,
+			grid: [CellWidth, CellWidth]
+		};
+
+		return <Draggable onStart={this.startDragFigure} grid={dragOptions.grid} bounds={dragOptions.bounds}>
 			<div className="figure" dangerouslySetInnerHTML={{__html: data.figure ? data.figure.code : null}}></div>
 		</Draggable>
 	}

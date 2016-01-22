@@ -17,6 +17,15 @@ class Figure {
         this.code = opts.code || null;
     }
 
+    moveValidity(curX, curY, x, y) {
+        if (curX >= 0 && x < this.width && 
+            curY >= 0 && y < this.width) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     get _name() {
         return this.name;
     }

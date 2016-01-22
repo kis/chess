@@ -55,8 +55,9 @@ class Field {
                 if (figure) {
                     figure.initPos = {
                         x: j - 1,
-                        y: 8 - i 
+                        y: i 
                     };
+                    figure.pos = figure.initPos;
                 }
 
                 isWhite = !isWhite;

@@ -50,9 +50,9 @@
 	background-color: #CEAD7C;
 }
 
-.chess-field:hover {
+/* .chess-field:hover {
 	background-color: yellow;
-}
+} */
 
 .figure {
 	font-size: 72px;

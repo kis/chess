@@ -5,12 +5,16 @@ import Draggable, {DraggableCore} from 'react-draggable';
 import Field from './Logic/Field';
 
 class ChessField extends React.Component {
-	stopDragFigure(e, data) {
-		let attrs = data.node.parentElement.attributes;
+	dropFigure(elData, e, data) {
+		console.log(elData)
+
+		//curr position
+		/*let attrs = data.node.parentElement.attributes;
 		let oldX = attrs['data-x'];
 		let oldY = attrs['data-y'];
-		console.log(oldX, oldY)
+		console.log(oldX, oldY)*/
 
+		//final position
 		let transform = data.node.style.transform;
 		let arr = transform.match(/(-)?\d{1,3}/g);
 		let [x, y] = arr;
@@ -50,7 +54,9 @@ class ChessField extends React.Component {
 			grid: [CellWidth, CellWidth]
 		};
 
-		return <Draggable onStop={this.stopDragFigure} grid={dragOptions.grid} bounds={dragOptions.bounds}>
+		var dropFigure = this.dropFigure.bind(this, data);
+
+		return <Draggable onStop={dropFigure} grid={dragOptions.grid} bounds={dragOptions.bounds}>
 			<div className="figure" dangerouslySetInnerHTML={{__html: data.figure ? data.figure.code : null}}></div>
 		</Draggable>
 	}

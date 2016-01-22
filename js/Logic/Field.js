@@ -61,7 +61,7 @@ class Field {
                     isEmpty: true,
                     figure: figure,
                     isBlack: !isWhite ? true : false, 
-                    color: isWhite ? 'chess-field white' : 'chess-field black'
+                    class: isWhite ? 'chess-field white' : 'chess-field black'
                 };  
             }
         }

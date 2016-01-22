@@ -3,33 +3,46 @@ import ReactDOM from 'react-dom';
 
 import Field from './Logic/Field';
 
+class LettersField extends React.Component {
+	render() {
+		return <div className="letters-field figure" key={this.props.key}>{this.props.index}</div>
+	}
+}
+
+class LettersLine extends React.Component {
+	render() {
+		return <div className='letters-line'>
+			<LettersField />
+			{this.props.letters.map(function(result, i) {
+			  return <LettersField index={result} key={i} /> 
+			})}
+		</div>
+	}
+}
+
+class ChessCell extends React.Component {
+	render() {
+		return <div className={this.props.data.class} key={this.props.key}>
+			<span className="figure" dangerouslySetInnerHTML={{__html: this.props.data.figure ? this.props.data.figure.code : null}}></span>
+		</div>
+	}
+}
+
 class ChessField extends React.Component {
 	render() {
 		return ( 
 			<div>
-				<div className='letters-line'>
-					<div className="letters-field"></div>
-					{this.props.letters.map(function(result, i) {
-					  return <div className="letters-field figure" key={i}>{result}</div>
-					})}
-				</div>
+				<LettersLine letters={this.props.letters} />
 				{this.props.data.map(function(result, i) {
 				  return <div className="chess-line" key={i}>
-		  			 	<div className="letters-field figure">{result.index}</div>
+				  		<LettersField index={result.index} />
 		  			 	{result.arr.map(function(res, j) {
-		  			 	  return <div className={res.color} key={j}>
-		  			 	  	<span className="figure" dangerouslySetInnerHTML={{__html: res.figure ? res.figure.code : null}}></span>
-		  			 	  </div>
+		  			 		return <ChessCell data={res} key={j} />
 		  			 	})}
-		  			 	<div className="letters-field figure">{result.index}</div>
+		  			 	<LettersField index={result.index} />
 		  			 </div>
 				})}
-	  			<div className="letters-line">
-					<div className="letters-field"></div>
-					{this.props.letters.map(function(result, i) {
-					  return <div className="letters-field figure" key={i}>{result}</div>
-					})}
-				</div>
+	  			<LettersLine letters={this.props.letters} />
 			</div>
 		);
 	}

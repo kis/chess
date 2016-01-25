@@ -36,6 +36,11 @@ class Field {
     getMoveStatus(elData, pos) {
         var currentField = this.data[pos.y].arr[pos.x];
         var isValidMove = elData.figure.isValidMove(pos);
+
+        if (!isValidMove) {
+            this.data[pos.y].arr[pos.x]
+        }
+
         var oursFigure = !currentField.isEmpty ? elData.figure.color == currentField.figure.color : null;
         var status = null;
 

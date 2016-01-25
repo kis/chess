@@ -6,6 +6,10 @@ import Field from './Logic/Field';
 
 class ChessField extends React.Component {
 	dropFigure(elData, e, data) {
+		console.log(elData, e, data)
+
+		// data.node.attributes[1].nodeValue = "touch-action: none; transform: translate(0px, 0px);";
+
 		let transform = data.node.style.transform;
 		let arr = transform.match(/(-)?\d{1,3}/g);
 		let [a, b] = arr;
@@ -18,10 +22,13 @@ class ChessField extends React.Component {
 	processMoving(elData, pos) {
 		console.log(pos.x, pos.y);
 		var moveStatus = field.getMoveStatus(elData, pos);
-		console.log(moveStatus)
+		var isValidMove = moveStatus.valid;
 
-		if (!moveStatus.valid) {
-			
+		console.log(isValidMove)
+
+		if (!isValidMove) {
+			console.log('qwe')
+			// elData.figure
 		}
 	}
 
@@ -46,7 +53,7 @@ class ChessField extends React.Component {
 		const CellWidth = 90;
 
 		var dragOptions = {
-			start: {x: -90, y: -90},
+			start: {x: 0, y: 0},
 			bounds: {
 				left: -90*data.x,
 				top: -90*data.y,
@@ -59,7 +66,7 @@ class ChessField extends React.Component {
 
 		var dropFigure = this.dropFigure.bind(this, data);
 
-		return <Draggable onStop={dropFigure} grid={dragOptions.grid} bounds={dragOptions.bounds}>
+		return <Draggable onStop={dropFigure} start={dragOptions.start} grid={dragOptions.grid} bounds={dragOptions.bounds}>
 			<div className="figure" dangerouslySetInnerHTML={{__html: data.figure ? data.figure.code : null}}></div>
 		</Draggable>
 	}

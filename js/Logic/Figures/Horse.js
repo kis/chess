@@ -9,35 +9,33 @@ class Horse extends Figure {
         this.code = this.color ? '&#9822;' : '&#9816;';
     }
 
-    move(x, y) {
+    isValidMove(pos) {
 
-    	if (this.pos.y < y) {
-	    	if ((this.pos.x + 1 == x && this.pos.y + 2 == y) ||
-	    	    (this.pos.x - 1 == x && this.pos.y + 2 == y)) {
-	    		this.pos.x = x;
-	    		this.pos.y = y;
+    	if (this.pos.y < pos.y) {
+	    	if ((this.pos.x + 1 == pos.x && this.pos.y + 2 == pos.y) ||
+	    	    (this.pos.x - 1 == pos.x && this.pos.y + 2 == pos.y)) {
+	    		return true;
 	    	}
 	
-	    	if ((this.pos.x + 2 == x && this.pos.y + 1 == y) ||
-	    	    (this.pos.x - 2 == x && this.pos.y + 1 == y)) {
-	    		this.pos.x = x;
-	    		this.pos.y = y;
+	    	if ((this.pos.x + 2 == pos.x && this.pos.y + 1 == pos.y) ||
+	    	    (this.pos.x - 2 == pos.x && this.pos.y + 1 == pos.y)) {
+	    		return true;
 	    	}
 		}
     	
-    	if (this.pos.y > y) {
-	    	if ((this.pos.x + 2 == x && this.pos.y - 1 == y) ||
-	    	    (this.pos.x - 2 == x && this.pos.y - 1 == y)) {
-	    		this.pos.x = x;
-	    		this.pos.y = y;
+    	if (this.pos.y > pos.y) {
+	    	if ((this.pos.x + 2 == pos.x && this.pos.y - 1 == pos.y) ||
+	    	    (this.pos.x - 2 == pos.x && this.pos.y - 1 == pos.y)) {
+	    		return true;
 	    	}
 
-	    	if ((this.pos.x + 1 == x && this.pos.y - 2 == y) ||
-	    	    (this.pos.x - 1 == x && this.pos.y - 2 == y)) {
-	    		this.pos.x = x;
-	    		this.pos.y = y;
+	    	if ((this.pos.x + 1 == pos.x && this.pos.y - 2 == pos.y) ||
+	    	    (this.pos.x - 1 == pos.x && this.pos.y - 2 == pos.y)) {
+	    		return true;
 	    	}
     	}
+
+    	return false;
 
     }
 

@@ -9,21 +9,21 @@ class Rook extends Figure {
         this.code = this.color ? '&#9820;' : '&#9814;';
     }
 
-    move(x, y) {
+    isValidMove(pos) {
 
     	if (this.pos.x > this.pos.y) {
-    		if (this.pos.x - this.pos.y == x - y) {
-    			this.pos.x = x;
-    			this.pos.y = y;
+    		if (this.pos.x - this.pos.y == pos.x - pos.y) {
+    			return true;
     		}
     	}
 
     	if (this.pos.x < this.pos.y) {
-    		if (this.pos.y - this.pos.x == y - x) {
-    			this.pos.x = x;
-    			this.pos.y = y;
+    		if (this.pos.y - this.pos.x == pos.y - pos.x) {
+    			return true;
     		}
     	}
+
+        return false;
 
     }
 

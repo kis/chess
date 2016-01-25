@@ -9,13 +9,14 @@ class King extends Figure {
         this.code = this.color ? '&#9818;' : '&#9812;';
     }
 
-    move(x, y) {
+    isValidMove(pos) {
 
-    	if (x - this.pos.x < 2 && x - this.pos.x > -2 && 
-    		y - this.pos.y < 2 && y - this.pos.y < -2) {
-    			this.pos.x = x;
-    			this.pos.y = y;
+    	if (pos.x - this.pos.x < 2 && pos.x - this.pos.x > -2 && 
+    		pos.y - this.pos.y < 2 && pos.y - this.pos.y < -2) {
+    			return true;
     	}
+
+        return false;
 
     }
 

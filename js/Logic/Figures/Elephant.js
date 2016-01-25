@@ -9,21 +9,21 @@ class Elephant extends Figure {
         this.code = this.color ? '&#9821;' : '&#9815;';
     }
 
-    move(x, y) {
+    isValidMove(pos) {
 
-    	if (this.pos.x == x && 
-    	   ((this.pos.y < y && y < 8) || 
-    	   (this.pos.y > y && y >= 0))) {
-    		this.pos.x = x;
-    		this.pos.y = y;
+    	if (this.pos.x == pos.x && 
+    	   ((this.pos.y < pos.y && pos.y < 8) || 
+    	    (this.pos.y > pos.y && pos.y >= 0))) {
+    		return true;
     	}
 
-    	if (this.pos.y == y &&
-    	   ((this.pos.x < x && x < 8) || 
-    	   (this.pos.x > x && x >= 0))) {
-    		this.pos.x = x;
-    		this.pos.y = y;
+    	if (this.pos.y == pos.y &&
+    	   ((this.pos.x < pos.x && pos.x < 8) || 
+    	    (this.pos.x > pos.x && pos.x >= 0))) {
+    		return true;
     	}
+
+        return false;
 
     }
 

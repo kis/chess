@@ -19,13 +19,9 @@ class Figure {
         this.width = 8;
     }
 
-    moveValidity(x, y) {
-        if (this.pos.x >= 0 && x < this.width && 
-            this.pos.y >= 0 && y < this.width) {
-            return true;
-        } else {
-            return false;
-        }
+    move(pos) {
+        this.pos.x = pos.x;
+        this.pos.y = pos.y; 
     }
 
     get _name() {

@@ -11,6 +11,7 @@ class Field {
         };
         this.width = 8;
         this.letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+        this.data = null;
     }
 
     set _positionToMove(pos) {
@@ -23,14 +24,30 @@ class Field {
     get _positionToMove() {
         return this.positionToMove;
     }
-    
-    moveValidity(curX, curY, x, y) {
-    	if (curX >= 0 && x < this.width && 
-    		curY >= 0 && y < this.width) {
-    		return true;
-    	} else {
-    		return false;
-    	}
+
+    set _data(data) {
+        this.data = data;
+    }
+
+    get _data() {
+        return this.data;
+    }
+
+    getMoveStatus(elData, pos) {
+        var currentField = this.data[pos.y].arr[pos.x];
+        var isValidMove = elData.figure.isValidMove(pos);
+        var oursFigure = !currentField.isEmpty ? elData.figure.color == currentField.figure.color : null;
+        var status = null;
+
+        if (currentField.isEmpty) {
+            status = {id: 1, valid: isValidMove, info: "move to empty cell"};
+        } else if (!oursFigure) {
+            status = {id: 2, valid: isValidMove, info: "move to enemy's cell"};
+        } else if (oursFigure) {
+            status = {id: 2, valid: isValidMove, info: "move to cell with your figure"};
+        }    
+
+        return status;       
     }
 
     getInitState() {
@@ -73,6 +90,8 @@ class Field {
                 };  
             }
         }
+
+        this.data = data;
 
         return data;
 	}

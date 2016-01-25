@@ -17,26 +17,11 @@ class ChessField extends React.Component {
 
 	processMoving(elData, pos) {
 		console.log(pos.x, pos.y);
+		var moveStatus = field.getMoveStatus(elData, pos);
+		console.log(moveStatus)
 
-		var currentField = this.props.data[pos.y].arr[pos.x];
-		var isValidField = elData.figure.moveValidity(pos.x, pos.y);
-
-		console.log(elData, currentField)
-
-		var oursFigure;
-
-		if (!currentField.isEmpty) {
-			oursFigure = elData.figure.color == currentField.figure.color;
-		}
-
-		if (isValidField) {
-			if (currentField.isEmpty) {
-				console.log('можем ходить')
-			} else if (!oursFigure) {
-				console.log('бьем')
-			} else if (oursFigure) {
-				console.log('наступили на свою фигуру')
-			}			
+		if (!moveStatus.valid) {
+			
 		}
 	}
 

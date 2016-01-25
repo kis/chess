@@ -9,21 +9,21 @@ class Queen extends Figure {
         this.code = this.color ? '&#9819;' : '&#9813;';
     }
 
-    move(x, y) {
+    isValidMove(pos) {
 
-        if (x !== this.pos.x) {
-            if (y == this.pos.y || 
-                this.pos.x - x == y - this.pos.y || 
-                this.pos.x - x == this.pos.y - y) {
-                this.pos.x = x;
-                this.pos.y = y;
+        if (pos.x !== this.pos.x) {
+            if (pos.y == this.pos.y || 
+                this.pos.x - pos.x == pos.y - this.pos.y || 
+                this.pos.x - pos.x == this.pos.y - pos.y) {
+                return true;
             }
         }
 
-        if (x == this.pos.x && y !== this.pos.y) {
-            this.pos.x = x;
-            this.pos.y = y;
+        if (pos.x == this.pos.x && pos.y !== this.pos.y) {
+            return true;
         }
+
+        return false;
 
     }
 

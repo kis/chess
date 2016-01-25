@@ -50,10 +50,11 @@ class ChessField extends React.Component {
 
 		if (!isValidMove) {
 			// console.log('qwe')
-			// elData.figure
-			// console.log(this.props.data[pos.y].arr[pos.x])
-			// this.state.data[oldPos.y].arr[oldPos.x].figure = null
-			// this.state.data[pos.y].arr[pos.x].figure = null
+			
+			/*setTimeout(() => {
+				this.setState({data: this.state.data});
+			}, 500);*/
+
 		} else {
 			
 			//change figure pos
@@ -66,7 +67,9 @@ class ChessField extends React.Component {
 			this.state.data[oldPos.y].arr[oldPos.x].figure = null;
 			this.state.data[oldPos.y].arr[oldPos.x].isEmpty = true;
 
-			this.setState({data: this.state.data});
+			setTimeout(() => {
+				this.setState({data: this.state.data});
+			}, 500);			
 
 			console.log(this.state.data[oldPos.y].arr[oldPos.x])
 			console.log(this.state.data[pos.y].arr[pos.x])

@@ -1,5 +1,5 @@
 
-import GameController from './GameController';
+import InitController from './InitController';
 
 class Field {
 
@@ -56,7 +56,7 @@ class Field {
     }
 
     getInitState() {
-        var gameController = new GameController();
+        var initController = new InitController();
 
         let data = new Array();
         let isWhite = false;
@@ -68,7 +68,7 @@ class Field {
                 arr: new Array()
             };
             for (let j = 0; j < 8; j++) {
-                let figure = gameController.getFigureByPosition({
+                let figure = initController.getFigureByPosition({
                     letter: this.letters[j], 
                     num: 8 - i,
                     x: j

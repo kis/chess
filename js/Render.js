@@ -4,9 +4,29 @@ import Draggable, {DraggableCore} from 'react-draggable';
 
 import Field from './Logic/Field';
 
+var dragOpts = {
+	start: {x: 0, y: 0}
+};
+
 class ChessField extends React.Component {
+
+	constructor(props) {
+		super(props);
+
+		this.field = new Field();
+
+		this.state = {
+			letters: this.field.letters,
+			data: this.field.getInitState()
+		}
+	}
+
+	componentDidMount() {
+		console.log('mount')
+	}
+
 	dropFigure(elData, e, data) {
-		console.log(elData, e, data)
+		// console.log(elData, e, data)
 
 		// data.node.attributes[1].nodeValue = "touch-action: none; transform: translate(0px, 0px);";
 
@@ -20,22 +40,43 @@ class ChessField extends React.Component {
 	}
 
 	processMoving(elData, pos) {
-		console.log(pos.x, pos.y);
-		var moveStatus = field.getMoveStatus(elData, pos);
+		// console.log(pos.x, pos.y);
+		var moveStatus = this.field.getMoveStatus(elData, pos);
 		var isValidMove = moveStatus.valid;
 
 		console.log(isValidMove)
 
+		let oldPos = Object.assign({}, elData.figure.pos);
+
 		if (!isValidMove) {
-			console.log('qwe')
+			// console.log('qwe')
 			// elData.figure
+			// console.log(this.props.data[pos.y].arr[pos.x])
+			// this.state.data[oldPos.y].arr[oldPos.x].figure = null
+			// this.state.data[pos.y].arr[pos.x].figure = null
+		} else {
+			
+			//change figure pos
+			elData.figure.move(pos);
+
+			//change props data - change figures
+			this.state.data[pos.y].arr[pos.x].figure = elData.figure;
+			this.state.data[pos.y].arr[pos.x].isEmpty = false;
+
+			this.state.data[oldPos.y].arr[oldPos.x].figure = null;
+			this.state.data[oldPos.y].arr[oldPos.x].isEmpty = true;
+
+			this.setState({data: this.state.data});
+
+			console.log(this.state.data[oldPos.y].arr[oldPos.x])
+			console.log(this.state.data[pos.y].arr[pos.x])
 		}
 	}
 
-	renderLettersLine() {
+	renderLettersLine(letters) {
 		return <div className='letters-line'>
 			{this.renderLettersField()}
-			{this.props.letters.map((result, i) => {
+			{letters.map((result, i) => {
 				return this.renderLettersField(result, i)
 			})}
 		</div>
@@ -46,10 +87,6 @@ class ChessField extends React.Component {
 	}
 
 	renderFigure(data) {
-		if (!data.figure) {
-			return '';
-		}
-
 		const CellWidth = 90;
 
 		var dragOptions = {
@@ -66,7 +103,7 @@ class ChessField extends React.Component {
 
 		var dropFigure = this.dropFigure.bind(this, data);
 
-		return <Draggable onStop={dropFigure} start={dragOptions.start} grid={dragOptions.grid} bounds={dragOptions.bounds}>
+		return <Draggable onStop={dropFigure} start={dragOpts.start} grid={dragOptions.grid} bounds={dragOptions.bounds}>
 			<div className="figure" dangerouslySetInnerHTML={{__html: data.figure ? data.figure.code : null}}></div>
 		</Draggable>
 	}
@@ -74,12 +111,12 @@ class ChessField extends React.Component {
 	renderChessCell(data, key) {
 		var cellClass = "chess-field " + data.class;
 		return <div className={cellClass} data-x={data.x} data-y={data.y} key={key}>
-			{this.renderFigure(data)}
+			{data.figure ? this.renderFigure(data) : null}
 		</div>
 	}
 
-	renderChessLines() {
-		return this.props.data.map((result, i) => {
+	renderChessLines(data) {
+		return data.map((result, i) => {
 		  	return <div className="chess-line" key={i}>
 		  		{this.renderLettersField(8-i)}
 			 	{result.arr.map((res, j) => {
@@ -91,18 +128,17 @@ class ChessField extends React.Component {
 	}
 
 	render() {
+		var letters = this.state.letters;
+		var data = this.state.data;
+
 		return ( 
 			<div>
-				{this.renderLettersLine()}
-				{this.renderChessLines()}
-				{this.renderLettersLine()}
+				{this.renderLettersLine(letters)}
+				{this.renderChessLines(data)}
+				{this.renderLettersLine(letters)}
 			</div>
 		);
 	}
 }
 
-var field = new Field();
-var letters = field.letters;
-var data = field.getInitState();
-
-ReactDOM.render(<ChessField letters={letters} data={data} />, document.getElementsByClassName('chess-area')[0]);
+ReactDOM.render(<ChessField />, document.getElementsByClassName('chess-area')[0]);

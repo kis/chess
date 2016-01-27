@@ -57,3 +57,7 @@
 .figure {
 	font-size: 72px;
 }
+
+.figure-init {
+	transform: translate(0px, 0px) !important;
+}

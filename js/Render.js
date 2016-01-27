@@ -4,10 +4,6 @@ import Draggable, {DraggableCore} from 'react-draggable';
 
 import Field from './Logic/Field';
 
-var dragOpts = {
-	start: {x: 0, y: 0}
-};
-
 class ChessField extends React.Component {
 
 	constructor(props) {
@@ -17,7 +13,11 @@ class ChessField extends React.Component {
 
 		this.state = {
 			letters: this.field.letters,
-			data: this.field.getInitState()
+			data: this.field.getInitState(),
+			figureClass: "figure",
+			figureStyle: {
+				transform: 'translate(0px, 0px)'
+			}
 		}
 	}
 
@@ -25,8 +25,28 @@ class ChessField extends React.Component {
 		console.log('mount')
 	}
 
+	componentWillReceiveProps(nextProps) {
+	    console.log(nextProps)
+
+	    /*_this.setState({
+	    	clientX: nextProps.start.x
+	        clientY: nextProps.start.y
+	    });*/
+	}
+
+	dragFigure(elData, e, data) {
+		setTimeout(() => {
+			this.setState({figureClass: 'figure'});
+
+			this.setState({figureStyle: {
+				transform: 'translate(0px, 0px)',
+				width: '90px'
+			}});
+		}, 500);
+	}
+
 	dropFigure(elData, e, data) {
-		// console.log(elData, e, data)
+		console.log(elData, e, data)
 
 		// data.node.attributes[1].nodeValue = "touch-action: none; transform: translate(0px, 0px);";
 
@@ -49,7 +69,19 @@ class ChessField extends React.Component {
 		let oldPos = Object.assign({}, elData.figure.pos);
 
 		if (!isValidMove) {
-			// console.log('qwe')
+			// console.log(this.state.data[oldPos.y].arr[oldPos.x].component)
+
+			// this.state.data[oldPos.y].arr[oldPos.x].component.setState({clientX: 0, clientY:})
+
+
+			setTimeout(() => {
+				this.setState({figureClass: 'figure figure-init'});
+
+				/*this.setState({figureStyle: {
+					transform: 'translate(0px, 0px)',
+					width: '90px'
+				}});*/
+			}, 500);
 			
 			/*setTimeout(() => {
 				this.setState({data: this.state.data});
@@ -93,22 +125,21 @@ class ChessField extends React.Component {
 		const CellWidth = 90;
 
 		var dragOptions = {
-			start: {x: 0, y: 0},
 			bounds: {
 				left: -90*data.x,
 				top: -90*data.y,
 				right: 90*(7-data.x), 
 				bottom: 90*(7-data.y)
 			},
-			zIndex: 99,
 			grid: [CellWidth, CellWidth]
 		};
 
+		var dragFigure = this.dragFigure.bind(this, data);
 		var dropFigure = this.dropFigure.bind(this, data);
 
-		return <Draggable onStop={dropFigure} start={dragOpts.start} grid={dragOptions.grid} bounds={dragOptions.bounds}>
-			<div className="figure" dangerouslySetInnerHTML={{__html: data.figure ? data.figure.code : null}}></div>
-		</Draggable>
+		return <Draggable onStart={dragFigure} onStop={dropFigure} grid={dragOptions.grid} bounds={dragOptions.bounds}>
+			<div className={this.state.figureClass} style={this.state.figureStyle} dangerouslySetInnerHTML={{__html: data.figure ? data.figure.code : null}}></div>
+		</Draggable>;
 	}
 
 	renderChessCell(data, key) {

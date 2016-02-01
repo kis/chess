@@ -11,6 +11,10 @@ class Figure extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.state = {
+			start: {x: 0, y: 0}
+		}
+
 		this.dragOptions = {
 			bounds: {
 				left: -90*this.props.opts.x,
@@ -49,12 +53,20 @@ class Figure extends React.Component {
 			// let component = this.state.data[oldPos.y].arr[oldPos.x].component;
 			// console.log(component)
 
-			// console.log(DraggableCore)
-
 			/*component.setState({
 	    		clientX: 0,
 	    		clientY: 0
 	    	});*/
+
+			// console.log(this)
+
+			console.log('asd')
+
+			this.setState({start: {x: 0, y: 0}});
+
+			console.log('setstate')
+
+			// this.props.opts.setState({lastX: 0});
 
 			// console.log(this.state.data[oldPos.y].arr[oldPos.x].component)
 
@@ -84,11 +96,9 @@ class Figure extends React.Component {
 	render() {
 		var dropFigure = this.dropFigure.bind(this, this.props.opts);
 
-		/*this.state.data[data.y].arr[data.x].component = new Draggable({
-			start: 0
-		});*/
-
-		return <Draggable onStop={dropFigure} grid={this.dragOptions.grid} bounds={this.dragOptions.bounds}>
+		// console.log(this.props.opts)
+	
+		return <Draggable onStop={dropFigure} start={this.state.start} grid={this.dragOptions.grid} bounds={this.dragOptions.bounds}>
 			<div className='figure' dangerouslySetInnerHTML={{__html: this.props.opts.figure ? this.props.opts.figure.code : null}}></div>
 		</Draggable>;
 	}
@@ -142,18 +152,21 @@ class ChessField extends React.Component {
 		})
 	}
 
-	renderFigure(res, moveFigure) {
+	renderFigure(res, opts) {
 		return <Figure opts={res} 
 				field={this.state.data} 
-				moveFigureToCell={moveFigure} />
+				moveFigureToCell={opts.moveFigure} />
 	}
 
 	renderChessCell(res, key) {
 		var cellClass = "chess-field " + res.class;
-		var moveFigure = this.moveFigureToCell.bind(this, this.state);
+
+		var opts = {
+			moveFigure: this.moveFigureToCell.bind(this, this.state)
+		};
 
 		return <div className={cellClass} data-x={res.x} data-y={res.y} key={key}>
-			{res.figure ? this.renderFigure(res, moveFigure) : null}
+			{res.figure ? this.renderFigure(res, opts) : null}
 		</div>
 	}
 

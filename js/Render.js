@@ -75,30 +75,9 @@ class Figure extends React.Component {
 			}, 500);*/
 
 		} else {
-			
 			//change figure pos
 			elData.figure.move(pos);
-
 			this.props.moveFigureToCell(oldPos, pos);
-
-			//change props data - change figures
-			/*this.props.field[pos.y].arr[pos.x].figure = elData.figure;
-			this.props.field[pos.y].arr[pos.x].isEmpty = false;
-
-			this.props.field[oldPos.y].arr[oldPos.x].figure = null;
-			this.props.field[oldPos.y].arr[oldPos.x].isEmpty = true;*/
-
-			// console.log(this.state.parent)
-
-			// ChessField.moveFigureToCell(oldPos, pos);
-			// ChessField
-
-			/*setTimeout(() => {
-				ChessField.setData(this.data);
-			}, 500);*/		
-
-			// console.log(this.data[oldPos.y].arr[oldPos.x])
-			// console.log(this.data[pos.y].arr[pos.x])
 		}
 	}
 
@@ -122,25 +101,26 @@ class ChessField extends React.Component {
 		super(props);
 
 		this.state = {
-			letters: field.letters,
 			data: field.getInitState()
-		}
+		};
 	}
 
-	moveFigureToCell(oldPos, pos) {
-		console.log(oldPos, pos)
+	moveFigureToCell(data, oldPos, pos) {
+		var obj = Object.assign({}, data);
+		obj.data[pos.y].arr[pos.x].figure = Object.assign({}, obj.data[oldPos.y].arr[oldPos.x].figure);
+		obj.data[pos.y].arr[pos.x].isEmpty = false;
+		obj.data[oldPos.y].arr[oldPos.x].figure = null;
+		obj.data[oldPos.y].arr[oldPos.x].isEmpty = true;
 
-		/*this.state.data[pos.y].arr[pos.x].figure = Object.assign({}, this.state.data[oldPos.y].arr[oldPos.x].figure);
-		this.state.data[pos.y].arr[pos.x].isEmpty = false;
-
-		this.state.data[oldPos.y].arr[oldPos.x].figure = null;
-		this.state.data[oldPos.y].arr[oldPos.x].isEmpty = true;*/
+		setTimeout(() => {
+			this.setState({data: obj.data});
+		}, 100);
 	}
 
 	renderLettersLine() {
 		return <div className='letters-line'>
 			{this.renderLettersField()}
-			{this.state.letters.map((result, i) => {
+			{this.props.letters.map((result, i) => {
 				return this.renderLettersField(result, i)
 			})}
 		</div>
@@ -162,16 +142,18 @@ class ChessField extends React.Component {
 		})
 	}
 
+	renderFigure(res, moveFigure) {
+		return <Figure opts={res} 
+				field={this.state.data} 
+				moveFigureToCell={moveFigure} />
+	}
+
 	renderChessCell(res, key) {
 		var cellClass = "chess-field " + res.class;
-		/*var figure = new Figure({
-			data: res
-		});*/
+		var moveFigure = this.moveFigureToCell.bind(this, this.state);
 
 		return <div className={cellClass} data-x={res.x} data-y={res.y} key={key}>
-			<Figure opts={res} 
-					field={this.state.data} 
-					moveFigureToCell={this.moveFigureToCell} />
+			{res.figure ? this.renderFigure(res, moveFigure) : null}
 		</div>
 	}
 
@@ -186,4 +168,4 @@ class ChessField extends React.Component {
 	}
 }
 
-ReactDOM.render(<ChessField />, document.getElementsByClassName('chess-area')[0]);
+ReactDOM.render(<ChessField letters={field.letters} />, document.getElementsByClassName('chess-area')[0]);

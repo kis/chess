@@ -3,26 +3,9 @@ import InitController from './InitController';
 
 class Field {
 
-    constructor(opts) {
-        this.opts = opts;
-        this.positionToMove = {
-            x: null,
-            y: null
-        };
-        this.width = 8;
+    constructor() {
         this.letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
         this.data = null;
-    }
-
-    set _positionToMove(pos) {
-        this.positionToMove = {
-            x: pos.x,
-            y: pos.y
-        };
-    }
-
-    get _positionToMove() {
-        return this.positionToMove;
     }
 
     set _data(data) {

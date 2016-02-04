@@ -6,6 +6,6 @@ import ChessField from './ChessField';
 
 const field = new Field();
 
-ReactDOM.render(<ChessField letters={field.letters} field={field} />, document.getElementsByClassName('chess-area')[0]);
+ReactDOM.render(<ChessField field={field} />, document.getElementsByClassName('chess-area')[0]);
 
 

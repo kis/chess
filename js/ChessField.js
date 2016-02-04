@@ -39,7 +39,7 @@ class ChessField extends React.Component {
 	renderLettersLine() {
 		return <div className='letters-line'>
 			{this.renderLettersField()}
-			{this.props.letters.map((result, i) => {
+			{this.props.field.letters.map((result, i) => {
 				return this.renderLettersField(result, i)
 			})}
 		</div>

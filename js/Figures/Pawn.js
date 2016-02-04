@@ -1,5 +1,5 @@
 
-import Figure from '../Figure';
+import Figure from '../Logic/Figure';
 
 class Pawn extends Figure {
 

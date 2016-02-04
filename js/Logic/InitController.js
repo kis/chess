@@ -1,10 +1,10 @@
 
-import King     from './Figures/King';
-import Queen    from './Figures/Queen';
-import Rook     from './Figures/Rook';
-import Elephant from './Figures/Elephant';
-import Horse    from './Figures/Horse';
-import Pawn     from './Figures/Pawn';
+import King     from '../Figures/King';
+import Queen    from '../Figures/Queen';
+import Rook     from '../Figures/Rook';
+import Elephant from '../Figures/Elephant';
+import Horse    from '../Figures/Horse';
+import Pawn     from '../Figures/Pawn';
 
 class InitController {
 

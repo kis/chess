@@ -61,3 +61,38 @@
 .figure-init {
 	transform: translate(0px, 0px) !important;
 }
+
+.chess-options {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 200px;
+	height: 190px;
+	background-color: #FFFCEA;
+	border: 2px solid #CEAD7C;
+}
+
+.moving-style {
+	text-align: center;
+	padding: 20px;
+	color: #7D4B00;
+}
+
+.button-style {
+	text-align: center;
+	padding: 10px;
+}
+
+.button-style button {
+	text-align: center;
+	padding: 10px;
+	background-color: white;
+	color: #7D4B00;
+	border: 2px solid #CEAD7C;
+	outline: none;
+}
+
+.button-style button:hover {
+	cursor: pointer;
+	background-color: #CEAD7C;
+}

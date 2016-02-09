@@ -46,12 +46,9 @@ class Field {
             data[i] = new Array();
             for (let j = 0; j < 8; j++) {
                 data[i][j] = {
-                    figure: initController.getFigureByPosition({
-                        x: j,
-                        y: i
-                    }),
+                    figure: initController.getFigureByPosition({x: j, y: i}),
                     class: (!(i%2) && !(j%2)) || (i%2 && j%2) ? 'white' : 'black'
-                };  
+                };
             }
         }
 

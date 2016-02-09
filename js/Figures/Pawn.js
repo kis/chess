@@ -11,15 +11,15 @@ class Pawn extends Figure {
 
     isValidMove(pos) {
 
-    	if (pos.x - this.pos.x < 2 && (pos.y - this.pos.y < 2 || this.pos.y - pos.y > -2)) {
-    		if (this.initPos.x == this.pos.x && this.initPos.y == this.pos.y) {
-                if (this.pos.x == pos.x && (pos.y - this.pos.y == 2 || pos.y - this.pos.y == -2)) {
+    	if (pos.x - this.pos.x < 2 && (pos.y - this.pos.y <= 2 || this.pos.y - pos.y >= -2)) {
+            if (this.pos.x == pos.x) {                
+                if (pos.y - this.pos.y == 1 || pos.y - this.pos.y == -1) {
                     return true;
                 }
-            }
 
-            if (this.pos.x == pos.x && (pos.y - this.pos.y == 1 || pos.y - this.pos.y == -1)) {
-                return true;
+                if ((pos.y - this.pos.y == 2 || pos.y - this.pos.y == -2) && this.initPos.y == this.pos.y) {
+                    return true;
+                }
     		}
 
     		if (this.pos.y == pos.y && (pos.x - this.pos.x == 1 || pos.x - this.pos.x == -1)) {

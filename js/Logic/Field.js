@@ -62,7 +62,7 @@ class Field {
                         x: j,
                         y: i 
                     };
-                    figure.pos = figure.initPos;
+                    figure.pos = Object.assign({}, figure.initPos);
                 }
 
                 isWhite = !isWhite;

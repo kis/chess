@@ -5,7 +5,6 @@ class Horse extends Figure {
 
     constructor(opts) {
         super(opts);
-        this.color = opts.color;
         this.code = this.color ? '&#9822;' : '&#9816;';
     }
 

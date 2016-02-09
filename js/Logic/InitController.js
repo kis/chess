@@ -59,83 +59,89 @@ class InitController {
     }
 
     getFigureByPosition(pos) {
-        if (pos.num == 1) {
-            if (pos.letter == 'a') {
-                return this.blackFigures.rooks[0];
+        let figure = null;
+
+        if (pos.y == 0) {
+            if (pos.x == 0) {
+                figure = this.blackFigures.rooks[0];
             }
 
-            if (pos.letter == 'b') {
-                return this.blackFigures.horses[0];
+            if (pos.x == 1) {
+                figure = this.blackFigures.horses[0];
             }
 
-            if (pos.letter == 'c') {
-                return this.blackFigures.elephants[0];
+            if (pos.x == 2) {
+                figure = this.blackFigures.elephants[0];
             }
 
-            if (pos.letter == 'd') {
-                return this.blackFigures.queens[0];
+            if (pos.x == 3) {
+                figure = this.blackFigures.queens[0];
             }
 
-            if (pos.letter == 'e') {
-                return this.blackFigures.kings[0];
+            if (pos.x == 4) {
+                figure = this.blackFigures.kings[0];
             }
 
-            if (pos.letter == 'f') {
-                return this.blackFigures.elephants[1];
+            if (pos.x == 5) {
+                figure = this.blackFigures.elephants[1];
             }
 
-            if (pos.letter == 'g') {
-                return this.blackFigures.horses[1];
+            if (pos.x == 6) {
+                figure = this.blackFigures.horses[1];
             }
 
-            if (pos.letter == 'h') {
-                return this.blackFigures.rooks[1];
-            }
-        }
-
-        if (pos.num == 2) {
-            return this.blackFigures.pawns[pos.x];
-        }
-
-        if (pos.num == 7) {
-            return this.whiteFigures.pawns[pos.x];
-        }
-
-        if (pos.num == 8) {
-            if (pos.letter == 'a') {
-                return this.whiteFigures.rooks[0];
-            }
-
-            if (pos.letter == 'b') {
-                return this.whiteFigures.horses[0];
-            }
-
-            if (pos.letter == 'c') {
-                return this.whiteFigures.elephants[0];
-            }
-
-            if (pos.letter == 'd') {
-                return this.whiteFigures.queens[0];
-            }
-
-            if (pos.letter == 'e') {
-                return this.whiteFigures.kings[0];
-            }
-
-            if (pos.letter == 'f') {
-                return this.whiteFigures.elephants[1];
-            }
-
-            if (pos.letter == 'g') {
-                return this.whiteFigures.horses[1];
-            }
-
-            if (pos.letter == 'h') {
-                return this.whiteFigures.rooks[1];
+            if (pos.x == 7) {
+                figure = this.blackFigures.rooks[1];
             }
         }
 
-        return null;
+        if (pos.y == 1) {
+            figure = this.blackFigures.pawns[pos.x];
+        }
+
+        if (pos.y == 6) {
+            figure = this.whiteFigures.pawns[pos.x];
+        }
+
+        if (pos.y == 7) {
+            if (pos.x == 0) {
+                figure = this.whiteFigures.rooks[0];
+            }
+
+            if (pos.x == 1) {
+                figure = this.whiteFigures.horses[0];
+            }
+
+            if (pos.x == 2) {
+                figure = this.whiteFigures.elephants[0];
+            }
+
+            if (pos.x == 3) {
+                figure = this.whiteFigures.queens[0];
+            }
+
+            if (pos.x == 4) {
+                figure = this.whiteFigures.kings[0];
+            }
+
+            if (pos.x == 5) {
+                figure = this.whiteFigures.elephants[1];
+            }
+
+            if (pos.x == 6) {
+                figure = this.whiteFigures.horses[1];
+            }
+
+            if (pos.x == 7) {
+                figure = this.whiteFigures.rooks[1];
+            }
+        }
+
+        if (figure) {
+            figure.setInitPos(pos);
+        }
+
+        return figure;
     }
 
 }

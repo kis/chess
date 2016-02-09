@@ -7,18 +7,16 @@ class ChessField extends React.Component {
 		super(props);
 
 		this.state = {
-			data: this.props.field.getInitState()
+			data: this.props.field.getData()
 		};
 	}
 
 	moveFigureToCell(data, oldPos, pos) {
 		var obj = Object.assign({}, data);
-		var figureCopy = obj[oldPos.y].arr[oldPos.x].figure;
-		console.log(figureCopy)
-		data[pos.y].arr[pos.x].figure = figureCopy;
-		data[pos.y].arr[pos.x].isEmpty = false;
-		data[oldPos.y].arr[oldPos.x].figure = null;
-		data[oldPos.y].arr[oldPos.x].isEmpty = true;
+		var figureCopy = obj[oldPos.y][oldPos.x].figure;
+		console.log(obj[oldPos.y][oldPos.x])
+		data[pos.y][pos.x].figure = figureCopy;
+		data[oldPos.y][oldPos.x].figure = null;
 
 		setTimeout(() => {
 			this.setState({data: data});
@@ -27,12 +25,12 @@ class ChessField extends React.Component {
 
 	repaintCell(data, oldPos) {
 		var obj = Object.assign({}, data);
-		var figureCopy = obj[oldPos.y].arr[oldPos.x].figure;
+		var figureCopy = obj[oldPos.y][oldPos.x].figure;
 
 		setTimeout(() => {
-			data[oldPos.y].arr[oldPos.x].figure = null;
+			data[oldPos.y][oldPos.x].figure = null;
 			this.setState({data: data});
-			data[oldPos.y].arr[oldPos.x].figure = figureCopy;
+			data[oldPos.y][oldPos.x].figure = figureCopy;
 			this.setState({data: data});
 		}, 100);
 	}
@@ -54,7 +52,7 @@ class ChessField extends React.Component {
 		return this.state.data.map((result, i) => {
 		  	return <div className="chess-line" key={i}>
 		  		{this.renderLettersField(8-i)}
-			 	{result.arr.map((res, j) => {
+			 	{result.map((res, j) => {
 			 		return this.renderChessCell(res, j)
 			 	})}
 			 	{this.renderLettersField(8-i)}

@@ -2,17 +2,12 @@
 class Figure {
 
     constructor(opts) {
-        this.initPos = opts.init ? {
-            x: opts.init.x,
-            y: opts.init.y
-        } : null;
+        this.color = opts.color;
+    }
 
-        this.pos = opts.initPos ? {
-            x: this.initPos.x,
-            y: this.initPos.y
-        } : null;
-        
-        this.code = opts.code || null;
+    setInitPos(pos) {
+        this.initPos = pos;
+        this.pos = Object.assign({}, this.initPos);
     }
 
     move(pos) {

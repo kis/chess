@@ -5,6 +5,7 @@ import Field from './components/Logic/Field';
 import ChessField from './components/ChessField';
 import Options from './components/Options';
 
+//TODO
 const field = new Field();
 
 ReactDOM.render(<ChessField field={field} />, document.getElementsByClassName('chess-area')[0]);

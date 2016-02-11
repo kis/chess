@@ -1,15 +1,22 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-var TodoConstants = require('../constants/ChessConstants');
+var ChessConstants = require('../constants/ChessConstants');
 
-var TodoActions = {
+var ChessActions = {
 
-  create: function(text) {
+  moveFigureToCell: function(data) {
     AppDispatcher.dispatch({
-      actionType: TodoConstants.TODO_CREATE,
-      text: text
+      actionType: ChessConstants.MOVE_FIGURE_TO_CELL,
+      data: data
+    });
+  },
+
+  repaintCell: function(data) {
+    AppDispatcher.dispatch({
+      actionType: ChessConstants.REPAINT_CELL,
+      data: data
     });
   }
 
 };
 
-module.exports = TodoActions;
+module.exports = ChessActions;

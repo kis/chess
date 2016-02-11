@@ -2,29 +2,49 @@ import React from 'react';
 
 import Figure from './Figure';
 
+var ChessActions = require('../actions/ChessActions');
+var ChessStore = require('../stores/ChessStore');
+
 class ChessField extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.props = {
+			letters: ChessStore.getField().letters
+		};
+
 		this.state = {
-			data: this.props.field.getData()
+			data: ChessStore.getField().data
 		};
 	}
 
 	moveFigureToCell(data, oldPos, pos) {
-		var obj = Object.assign({}, data);
+		ChessActions.moveFigureToCell({
+			data: data,
+			oldPos: oldPos,
+			pos: pos
+		});
+
+		/*var obj = Object.assign({}, data);
 		var figureCopy = obj[oldPos.y][oldPos.x].figure;
+		
 		console.log(obj[oldPos.y][oldPos.x])
+		
 		data[pos.y][pos.x].figure = figureCopy;
 		data[oldPos.y][oldPos.x].figure = null;
 
 		setTimeout(() => {
 			this.setState({data: data});
-		}, 100);
+		}, 100);*/
 	}
 
 	repaintCell(data, oldPos) {
-		var obj = Object.assign({}, data);
+		ChessActions.moveFigureToCell({
+			data: data,
+			oldPos: oldPos
+		});
+
+		/*var obj = Object.assign({}, data);
 		var figureCopy = obj[oldPos.y][oldPos.x].figure;
 
 		setTimeout(() => {
@@ -32,7 +52,7 @@ class ChessField extends React.Component {
 			this.setState({data: data});
 			data[oldPos.y][oldPos.x].figure = figureCopy;
 			this.setState({data: data});
-		}, 100);
+		}, 100);*/
 	}
 
 	renderLettersLine() {

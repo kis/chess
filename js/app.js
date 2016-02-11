@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Field from './Logic/Field';
-import ChessField from './ChessField';
-import Options from './Options';
+import Field from './Components/Logic/Field';
+import ChessField from './Components/ChessField';
+import Options from './Components/Options';
 
 const field = new Field();
 

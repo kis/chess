@@ -22,30 +22,32 @@ function moveFigureToCell(eData) {
   data[oldPos.y][oldPos.x].figure = null;
 
   field.data = data;
-
-  /*setTimeout(() => {
-    this.setState({data: data});
-  }, 100);*/
 }
 
-function repaintCell(data) {
-  var data = data.data;
-  var oldPos = data.oldPos;
+function repaintCell(eData) {
+  var data = eData.data;
+  var oldPos = eData.oldPos;
 
   var obj = Object.assign({}, data);
   var figureCopy = obj[oldPos.y][oldPos.x].figure;
 
+  data[oldPos.y][oldPos.x].figure = null;
+  field.data = data;
+  ChessStore.emitChange();
+
   setTimeout(() => {
-    data[oldPos.y][oldPos.x].figure = null;
-    // this.setState({data: data});
     data[oldPos.y][oldPos.x].figure = figureCopy;
-    // this.setState({data: data});
+    field.data = data;
   }, 100);
 }
 
 var ChessStore = Object.assign({}, EventEmitter.prototype, {
-  getField: function() {
+  initField: function() {
     field = new Field();
+    return field;
+  },
+
+  getField: function() {
     return field;
   },
 
@@ -62,7 +64,6 @@ var ChessStore = Object.assign({}, EventEmitter.prototype, {
   }
 });
 
-// Register callback to handle all updates
 AppDispatcher.register(function(action) {
   var data;
 
@@ -76,9 +77,6 @@ AppDispatcher.register(function(action) {
       repaintCell(action.data);
       ChessStore.emitChange();
       break;
-
-    default:
-      // no op
   }
 });
 

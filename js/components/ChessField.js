@@ -9,13 +9,29 @@ class ChessField extends React.Component {
 	constructor(props) {
 		super(props);
 
+		var field = ChessStore.initField();
+
 		this.props = {
-			letters: ChessStore.getField().letters
+			letters: field.letters
 		};
 
 		this.state = {
-			data: ChessStore.getField().data
+			data: field.data
 		};
+	}
+
+	componentDidMount() {
+		ChessStore.addChangeListener(this._onChange.bind(this));
+	}
+
+	componentWillUnmount() {
+		ChessStore.removeChangeListener(this._onChange.bind(this));
+	}
+
+	_onChange() {
+		setTimeout(() => {
+			this.setState({data: ChessStore.getField().data});
+		}, 100);
 	}
 
 	moveFigureToCell(data, oldPos, pos) {
@@ -24,35 +40,13 @@ class ChessField extends React.Component {
 			oldPos: oldPos,
 			pos: pos
 		});
-
-		/*var obj = Object.assign({}, data);
-		var figureCopy = obj[oldPos.y][oldPos.x].figure;
-		
-		console.log(obj[oldPos.y][oldPos.x])
-		
-		data[pos.y][pos.x].figure = figureCopy;
-		data[oldPos.y][oldPos.x].figure = null;
-
-		setTimeout(() => {
-			this.setState({data: data});
-		}, 100);*/
 	}
 
 	repaintCell(data, oldPos) {
-		ChessActions.moveFigureToCell({
+		ChessActions.repaintCell({
 			data: data,
 			oldPos: oldPos
 		});
-
-		/*var obj = Object.assign({}, data);
-		var figureCopy = obj[oldPos.y][oldPos.x].figure;
-
-		setTimeout(() => {
-			data[oldPos.y][oldPos.x].figure = null;
-			this.setState({data: data});
-			data[oldPos.y][oldPos.x].figure = figureCopy;
-			this.setState({data: data});
-		}, 100);*/
 	}
 
 	renderLettersLine() {
